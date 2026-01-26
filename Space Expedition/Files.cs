@@ -150,5 +150,16 @@ namespace Space_Expedition
             inventory[index] = newArtifact;
             count++;
         }
+
+        public static void Save(string path, ArtifactInventory[] inventory, int count)
+        {
+            using (StreamReader sw = new StreamReader("expedition_summary.txt"))
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    ArtifactInventory invent = inventory[i];
+                 }  
+            }
+        }
     }
 }

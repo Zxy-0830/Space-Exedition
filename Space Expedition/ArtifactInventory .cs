@@ -8,33 +8,26 @@ namespace Space_Expedition
 {
     internal class ArtifactInventory
     {
-        private string encodedName;
-        private string planet;
-        private string discoveryDate;
-        private string storageLocation;
-        private string description;
-        private string decodedName;
-
-        public string EncodedName { get { return encodedName; } }
-        public string Planet { get { return planet; } }
-        public string DiscoveryDate { get { return discoveryDate; } }
-        public string StorageLocation { get { return storageLocation; } }
-        public string Description { get { return description; } }
-        public string DecodedName { get { return decodedName; } }
+        public string EncodedName {  get; set; }
+        public string Planet {  get; set; }
+        public string DiscoveryDate { get; set; }
+        public string StorageLocation {  get; set; }
+        public string Description {  get; set; }
+        public string DecodedName {  get; set; }
 
         public ArtifactInventory(string encodedName,string planet,string discoveryDate,string storageLocation,string description,string decodedName)
         {
-            this.encodedName = encodedName;
-            this.planet = planet;
-            this.discoveryDate = discoveryDate;
-            this.storageLocation = storageLocation;
-            this.description = description;
-            this.decodedName = decodedName;
+            this.EncodedName = encodedName;
+            this.Planet = planet;
+            this.DiscoveryDate = discoveryDate;
+            this.StorageLocation = storageLocation;
+            this.Description = description;
+            this.DecodedName = decodedName;
         }
 
         public override string ToString()
         {
-            return encodedName + " | " + planet + " | " + discoveryDate + " | " + storageLocation + " | " + description;
+            return EncodedName + " | " + Planet + " | " + DiscoveryDate + " | " + StorageLocation + " | " + Description;
         }        
     }
 }
