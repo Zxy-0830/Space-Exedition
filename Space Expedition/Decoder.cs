@@ -47,9 +47,50 @@ namespace Space_Expedition
                 return Mirror(c);
             }
 
-
             c = MapForward(c);
             return DecodeRecursive(c, level - 1);
+        }
+
+        public static string DecodeName(string encodedName)
+        {
+            string result = "";
+            int i = 0;
+
+            while (i < encodedName.Length)
+            {
+                if (encodedName[i] == ' ' || encodedName[i] == ',' || encodedName[i] == '|' || encodedName[i] == '"')
+                {
+                    i++;
+                    continue;
+                }
+
+                char letter = char.ToUpper(encodedName[i]);
+                if (letter < 'A' || letter > 'Z')
+                {
+                    i++;
+                    continue;
+                }
+
+                i++;
+
+                string numText = "";
+                while (i < encodedName.Length && char.IsDigit(encodedName[i]))
+                {
+                    numText += encodedName[i];
+                    i++;
+                }
+
+                int level = 0;
+                if (numText != "")
+                {
+                    level = int.Parse(numText);
+                }
+
+                char decodedChar = DecodeRecursive(letter, level);
+                result += decodedChar;
+            }
+
+            return result;
         }
     }
 }
