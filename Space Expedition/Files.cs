@@ -43,5 +43,14 @@ namespace Space_Expedition
                 }
             }
         }
+
+        public static void Displaying(ArtifactInventory[] inventory, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                ArtifactInventory artifact = inventory[i];
+                Console.WriteLine($"{artifact.EncodedName} | {artifact.Planet} | {artifact.DiscoveryDate} | {artifact.StorageLocation} | {artifact.Description} ");
+            }
+        }
     }
 }
