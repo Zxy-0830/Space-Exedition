@@ -22,7 +22,6 @@ namespace Space_Expedition
                     return MappedArray[i];
                 }
             }
-
             return c;
         }
 
@@ -37,8 +36,20 @@ namespace Space_Expedition
                     return OriginalArray[mirrorIndex];
                 }
             }
-
             return c;
+        }
+
+        private static char DecodeRecursive(char c, int level)
+        {
+            c = char.ToUpper(c);
+            if (level == 0)
+            {
+                return Mirror(c);
+            }
+
+
+            c = MapForward(c);
+            return DecodeRecursive(c, level - 1);
         }
     }
 }
