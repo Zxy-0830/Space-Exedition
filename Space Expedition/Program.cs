@@ -5,7 +5,7 @@
         static void Main(string[] args)
         {
             ArtifactInventory[] inventory = new ArtifactInventory[20];
-            int count = 0;            
+            int count = 0;
         }
     }
 }

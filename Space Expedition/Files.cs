@@ -42,6 +42,7 @@ namespace Space_Expedition
                     inventory[count++] = artifact;
                 }
             }
+            InventorySort(inventory, count);
         }
 
         public static void Displaying(ArtifactInventory[] inventory, int count)
@@ -96,6 +97,58 @@ namespace Space_Expedition
                 }
             }
             return -1;
+        }
+
+        public static void Adding(ref ArtifactInventory[] inventory, ref int count)
+        {
+            Console.Write("Please enter EncodedName here: ");
+            string encodedName = Console.ReadLine();
+            Console.Write("Please enter which planet you find: ");
+            string planet = Console.ReadLine();
+            Console.Write("Please enter the discovery date here: ");
+            string discoveryDate = Console.ReadLine();
+            Console.Write("Please enter the storage location here: ");
+            string storageLocation = Console.ReadLine();
+            Console.Write("Please enter the description here: ");
+            string description = Console.ReadLine();
+            string decodedName = Decoder.DecodeName(encodedName);
+
+            int found = SearchingByDecodedName(inventory, count, decodedName);
+            if (found != -1)
+            {
+                Console.WriteLine("This inventory has already in here. ");
+                return;
+            }
+
+            if (count >= inventory.Length)
+            {
+                ArtifactInventory[] moreInventory = new ArtifactInventory[inventory.Length * 2];
+
+                for (int i = 0; i < inventory.Length; i++)
+                {
+                    moreInventory[i] = inventory[i];
+                }
+
+                inventory = moreInventory;
+            }
+
+            ArtifactInventory newArtifact = new ArtifactInventory(encodedName, planet, discoveryDate, storageLocation, description, decodedName);
+            int index = count;
+            while (index > 0)
+            {
+                int compare = inventory[index - 1].DecodedName.CompareTo(newArtifact.DecodedName);
+                if (compare > 0)
+                {
+                    inventory[index] = inventory[index - 1];
+                    index--;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            inventory[index] = newArtifact;
+            count++;
         }
     }
 }
