@@ -16,7 +16,7 @@ namespace Space_Expedition
                 Console.WriteLine("\nWelcome to use the Space Expedition Manage System! ");
                 Console.WriteLine("1.Add new artifact. ");
                 Console.WriteLine("2.View inventory. ");
-                Console.WriteLine("0.Exit ");
+                Console.WriteLine("0.Exit and Save ");
 
                 string choice = Console.ReadLine();
 
@@ -31,7 +31,8 @@ namespace Space_Expedition
                         Files.Displaying(inventory, count);
                         break;
                     case "0":
-                        Console.WriteLine("Exit. ");
+                        Files.Save("expedition_summary.txt", inventory, count);
+                        Console.WriteLine("Saved successfully and Exit. ");
                         return;
                     default:
                         Console.WriteLine("Invalid enter. ");

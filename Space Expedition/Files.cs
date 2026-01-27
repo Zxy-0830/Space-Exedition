@@ -153,11 +153,11 @@ namespace Space_Expedition
 
         public static void Save(string path, ArtifactInventory[] inventory, int count)
         {
-            using (StreamReader saveFiles = new StreamReader("expedition_summary.txt"))
+            using (StreamWriter saveFiles = new StreamWriter("expedition_summary.txt"))
             {
                 for (int i = 0; i < count; i++)
                 {
-                   
+                    saveFiles.WriteLine(inventory[i].EncodedName + "|" + inventory[i].Planet + "|" + inventory[i].DiscoveryDate + "|" + inventory[i].StorageLocation + "|" + inventory[i].Description);
                 }  
             }
         }
