@@ -14,35 +14,45 @@ namespace Space_Expedition
         {
             inventory = new ArtifactInventory[20];
             count = 0;
-            using (StreamReader sr = new StreamReader("galactic_vault.txt"))
+            
+            try
             {
-                string line;
-                while ((line = sr.ReadLine()) != null)
+                using (StreamReader sr = new StreamReader("galactic_vault.txt"))
                 {
-                    if (count >= inventory.Length)
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
                     {
-                        ArtifactInventory[] newInventory = new ArtifactInventory[inventory.Length * 2];
-
-                        for (int i = 0; i < inventory.Length; i++)
+                        if (count >= inventory.Length)
                         {
-                            newInventory[i] = inventory[i];
-                        }
+                            ArtifactInventory[] newInventory = new ArtifactInventory[inventory.Length * 2];
 
-                        inventory = newInventory;
+                            for (int i = 0; i < inventory.Length; i++)
+                            {
+                                newInventory[i] = inventory[i];
+                            }
+
+                            inventory = newInventory;
+                        }
+                        string[] array = line.Split(',');
+                        if (array.Length < 5) continue;
+                        string encodedName = array[0].Trim().Trim('"');
+                        string planet = array[1].Trim();
+                        string discoveryDate = array[2].Trim();
+                        string storageLocation = array[3].Trim();
+                        string description = array[4].Trim();
+                        string decodedName = Decoder.DecodeName(encodedName);
+                        inventory[count++] = new ArtifactInventory(encodedName, planet, discoveryDate, storageLocation, description, decodedName);
                     }
-                    string[] array = line.Split('|');
-                    if (array.Length < 5) continue;
-                    string encodedName = array[0].Trim();
-                    string planet = array[1].Trim();
-                    string discoveryDate = array[2].Trim();
-                    string storageLocation = array[3].Trim();
-                    string description = array[4].Trim();
-                    string decodedName = Decoder.DecodeName(encodedName);
-                    ArtifactInventory artifact = new ArtifactInventory(encodedName, planet, discoveryDate, storageLocation, description, decodedName);
-                    inventory[count++] = artifact;
                 }
+                InventorySort(inventory, count);
             }
-            InventorySort(inventory, count);
+            catch (IOException)
+            {
+                Console.WriteLine("Can't load the file.");
+            } catch(Exception)
+            {
+                Console.WriteLine("This file can not be readed. ");
+            }
         }
 
         public static void Displaying(ArtifactInventory[] inventory, int count)
@@ -50,7 +60,7 @@ namespace Space_Expedition
             for (int i = 0; i < count; i++)
             {
                 ArtifactInventory artifact = inventory[i];
-                Console.WriteLine($"{artifact.EncodedName} | {artifact.Planet} | {artifact.DiscoveryDate} | {artifact.StorageLocation} | {artifact.Description} ");
+                Console.WriteLine($"{artifact.DecodedName} | {artifact.Planet} | {artifact.DiscoveryDate} | {artifact.StorageLocation} | {artifact.Description} ");
             }
         }
 

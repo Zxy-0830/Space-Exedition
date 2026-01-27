@@ -57,9 +57,21 @@ namespace Space_Expedition
             int i = 0;
 
             while (i < encodedName.Length)
-            {              
+            {
+                char ch = encodedName[i];
 
-                char letter = char.ToUpper(encodedName[i]);
+                if (ch == '|' || ch == '"' || ch == ' ')
+                {
+                    i++;
+                    continue;
+                }
+
+                if (ch == ',')
+                {
+                    break;
+                }
+
+                char letter = char.ToUpper(ch);
                 if (letter < 'A' || letter > 'Z')
                 {
                     i++;
@@ -81,10 +93,10 @@ namespace Space_Expedition
                     level = int.Parse(numText);
                 }
 
-                result += DecodeRecursive(letter, level); 
+                result += DecodeRecursive(letter, level);
             }
-
             return result;
         }
+
     }
 }
