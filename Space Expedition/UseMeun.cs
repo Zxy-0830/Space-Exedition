@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,7 @@ namespace Space_Expedition
                         Console.WriteLine("Added.");
                         break;
                     case "2":
+                        Files.Load("galactic_vault.txt", out inventory, out count);
                         Files.Displaying(inventory, count);
                         break;
                     case "0":
