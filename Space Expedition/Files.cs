@@ -112,6 +112,7 @@ namespace Space_Expedition
             Console.Write("Please enter the description here: ");
             string description = Console.ReadLine();
             string decodedName = Decoder.DecodeName(encodedName);
+            decodedName = decodedName.ToUpper();
 
             int found = SearchingByDecodedName(inventory, count, decodedName);
             if (found != -1)

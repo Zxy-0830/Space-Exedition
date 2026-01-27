@@ -13,6 +13,9 @@ namespace Space_Expedition
         {
             while (true)
             {
+                Files.Load("galactic_vault.txt", out inventory, out count);
+                Files.InventorySort(inventory, count);
+
                 Console.WriteLine("\nWelcome to use the Space Expedition Manage System! ");
                 Console.WriteLine("1.Add new artifact. ");
                 Console.WriteLine("2.View inventory. ");
@@ -27,7 +30,6 @@ namespace Space_Expedition
                         Console.WriteLine("Added.");
                         break;
                     case "2":
-                        Files.Load("galactic_vault.txt", out inventory, out count);
                         Files.Displaying(inventory, count);
                         break;
                     case "0":
