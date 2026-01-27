@@ -51,7 +51,7 @@ namespace Space_Expedition
                 Console.WriteLine("Can't load the file.");
             } catch(Exception)
             {
-                Console.WriteLine("This file can not be readed. ");
+                Console.WriteLine("Data has some error, caused can't load. ");
             }
         }
 
@@ -164,12 +164,19 @@ namespace Space_Expedition
 
         public static void Save(string path, ArtifactInventory[] inventory, int count)
         {
-            using (StreamWriter saveFiles = new StreamWriter("expedition_summary.txt"))
+            try
             {
-                for (int i = 0; i < count; i++)
+                using (StreamWriter saveFiles = new StreamWriter("expedition_summary.txt"))
                 {
-                    saveFiles.WriteLine(inventory[i].EncodedName + "|" + inventory[i].Planet + "|" + inventory[i].DiscoveryDate + "|" + inventory[i].StorageLocation + "|" + inventory[i].Description);
-                }  
+                    for (int i = 0; i < count; i++)
+                    {
+                        saveFiles.WriteLine(inventory[i].EncodedName + "|" + inventory[i].Planet + "|" + inventory[i].DiscoveryDate + "|" + inventory[i].StorageLocation + "|" + inventory[i].Description);
+                    }
+                }
+            }
+            catch(IOException)
+            {
+                Console.WriteLine("There has some error to save the summary.");
             }
         }
     }
