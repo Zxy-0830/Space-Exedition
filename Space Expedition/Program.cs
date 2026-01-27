@@ -6,6 +6,7 @@
         {
             ArtifactInventory[] inventory = new ArtifactInventory[20];
             int count = 0;
+            UseMeun.Run(ref inventory, ref count);
         }
     }
 }
