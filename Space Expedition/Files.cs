@@ -35,13 +35,20 @@ namespace Space_Expedition
                         }
                         string[] array = line.Split(',');
                         if (array.Length < 5) continue;
+
                         string encodedName = array[0].Trim().Trim('"');
                         string planet = array[1].Trim();
                         string discoveryDate = array[2].Trim();
                         string storageLocation = array[3].Trim();
                         string description = array[4].Trim();
+                        for (int j = 5; j < array.Length; j++)
+                        {
+                            description += "," + array[j];
+                        }
+                        description = description.Trim();
                         string decodedName = Decoder.DecodeName(encodedName).ToUpper();
                         inventory[count++] = new ArtifactInventory(encodedName, planet, discoveryDate, storageLocation, description, decodedName);
+
                     }
                 }
                 InventorySort(inventory, count);
