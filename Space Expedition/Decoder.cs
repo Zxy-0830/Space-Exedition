@@ -9,10 +9,10 @@ namespace Space_Expedition
 {
     internal class Decoder
     {
-        private static char[] OriginalArray = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
-        private static char[] MappedArray = { 'H', 'Z', 'A', 'U', 'Y', 'E', 'K', 'G', 'O', 'T', 'I', 'R', 'J', 'V', 'W', 'N', 'M', 'F', 'Q', 'S', 'D', 'B', 'X', 'L', 'C', 'P' };
+        public static char[] OriginalArray = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+        public static char[] MappedArray = { 'H', 'Z', 'A', 'U', 'Y', 'E', 'K', 'G', 'O', 'T', 'I', 'R', 'J', 'V', 'W', 'N', 'M', 'F', 'Q', 'S', 'D', 'B', 'X', 'L', 'C', 'P' };
         
-        private static char MapForward(char c)
+        public static char MapForward(char c)
         {
             c = char.ToUpper(c);
             for (int i = 0; i < OriginalArray.Length; i++)
@@ -25,7 +25,7 @@ namespace Space_Expedition
             return c;
         }
 
-        private static char Mirror(char c)
+        public static char Mirror(char c)
         {
             c = char.ToUpper(c);
             for (int i = 0; i < OriginalArray.Length; i++)
@@ -39,7 +39,7 @@ namespace Space_Expedition
             return c;
         }
 
-        private static char DecodeRecursive(char c, int level)
+        public static char DecodeRecursive(char c, int level)
         {
             c = char.ToUpper(c);
             if (level == 0)

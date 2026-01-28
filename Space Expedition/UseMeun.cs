@@ -11,11 +11,10 @@ namespace Space_Expedition
     {
         public static void Run(ref ArtifactInventory[] inventory, ref int count)
         {
+            Files.Load("galactic_vault.txt", out inventory, out count);
+            Files.InventorySort(inventory, count);
             while (true)
             {
-                Files.Load("galactic_vault.txt", out inventory, out count);
-                Files.InventorySort(inventory, count);
-
                 Console.WriteLine("\nWelcome to use the Space Expedition Manage System! ");
                 Console.WriteLine("1.Add new artifact. ");
                 Console.WriteLine("2.View inventory. ");

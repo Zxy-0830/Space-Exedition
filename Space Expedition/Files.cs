@@ -40,7 +40,7 @@ namespace Space_Expedition
                         string discoveryDate = array[2].Trim();
                         string storageLocation = array[3].Trim();
                         string description = array[4].Trim();
-                        string decodedName = Decoder.DecodeName(encodedName);
+                        string decodedName = Decoder.DecodeName(encodedName).ToUpper();
                         inventory[count++] = new ArtifactInventory(encodedName, planet, discoveryDate, storageLocation, description, decodedName);
                     }
                 }
