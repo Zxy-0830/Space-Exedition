@@ -17,11 +17,16 @@ namespace Space_Expedition
             
             try
             {
-                using (StreamReader sr = new StreamReader("galactic_vault.txt"))
+                using (StreamReader sr = new StreamReader(path))
                 {
                     string line;
                     while ((line = sr.ReadLine()) != null)
                     {
+                        if (line.Trim() == "")
+                        {
+                            continue;
+                        }
+
                         if (count >= inventory.Length)
                         {
                             ArtifactInventory[] newInventory = new ArtifactInventory[inventory.Length * 2];
@@ -51,7 +56,6 @@ namespace Space_Expedition
 
                     }
                 }
-                InventorySort(inventory, count);
             }
             catch (IOException)
             {
@@ -118,18 +122,52 @@ namespace Space_Expedition
 
         public static void Adding(ref ArtifactInventory[] inventory, ref int count)
         {
-            Console.Write("Please enter EncodedName here: ");
-            string encodedName = Console.ReadLine();
-            Console.Write("Please enter which planet you find: ");
-            string planet = Console.ReadLine();
-            Console.Write("Please enter the discovery date here: ");
-            string discoveryDate = Console.ReadLine();
-            Console.Write("Please enter the storage location here: ");
-            string storageLocation = Console.ReadLine();
-            Console.Write("Please enter the description here: ");
-            string description = Console.ReadLine();
-            string decodedName = Decoder.DecodeName(encodedName);
-            decodedName = decodedName.ToUpper();
+            Console.Write("Please enter artifact file name: ");
+            string fileName = Console.ReadLine();
+            if (fileName == null) fileName = "";
+            fileName = fileName.Trim();
+
+            string encodedName = "";
+            string planet = "";
+            string discoveryDate = "";
+            string storageLocation = "";
+            string description = "";
+
+            try
+            {
+                using (StreamReader sr = new StreamReader(fileName))
+                {
+                    string line = sr.ReadLine();
+                    if (line == null) { Console.WriteLine("Empty file."); return; }
+
+                    string[] array = line.Split(',');
+                    if (array.Length < 5) { Console.WriteLine("Bad data."); return; }
+
+                    encodedName = array[0].Trim().Trim('"');
+                    planet = array[1].Trim();
+                    discoveryDate = array[2].Trim();
+                    storageLocation = array[3].Trim();
+
+                    description = array[4].Trim();
+                    for (int j = 5; j < array.Length; j++)
+                    {
+                        description += "," + array[j];
+                    }
+                    description = description.Trim();
+                }
+            }
+            catch (IOException)
+            {
+                Console.WriteLine("Can't open file.");
+                return;
+            }
+            catch
+            {
+                Console.WriteLine("Data error.");
+                return;
+            }
+
+            string decodedName = Decoder.DecodeName(encodedName).ToUpper();
 
             int found = SearchingByDecodedName(inventory, count, decodedName);
             if (found != -1)
@@ -173,7 +211,7 @@ namespace Space_Expedition
         {
             try
             {
-                using (StreamWriter saveFiles = new StreamWriter("expedition_summary.txt"))
+                using (StreamWriter saveFiles = new StreamWriter(path))
                 {
                     for (int i = 0; i < count; i++)
                     {

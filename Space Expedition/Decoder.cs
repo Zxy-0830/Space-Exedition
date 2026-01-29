@@ -42,7 +42,7 @@ namespace Space_Expedition
         public static char DecodeRecursive(char c, int level)
         {
             c = char.ToUpper(c);
-            if (level == 0)
+            if (level <= 1)
             {
                 return Mirror(c);
             }
