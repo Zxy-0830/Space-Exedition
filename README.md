@@ -13,6 +13,8 @@ Users can:
 - Add new artifact records
 - Save updated data
 
+---
+
 ## Tech Stack
 
 - C#
@@ -20,6 +22,8 @@ Users can:
 - Console Application
 - Visual Studio
 - GitHub
+
+---
 
 ## Features
 
@@ -29,6 +33,8 @@ Users can:
 - Inventory management
 - Data saving and loading
 
+---
+
 ## Project Structure
 
 - Program.cs
@@ -37,6 +43,8 @@ Users can:
 - Files.cs
 - UseMenu.cs
 
+---
+
 ## How to Run
 
 1. Clone the repository
@@ -44,9 +52,16 @@ Users can:
 3. Build the solution
 4. Run the application
 
+---
+
 ## Screenshot
 
-(Add screenshot here)
+<img width="1113" height="626" alt="2540e44e-866b-4023-a4f0-05ed7f7529f7" src="https://github.com/user-attachments/assets/acc670d4-302f-49f8-a41d-a5966d6ddb7e" />
+<img width="1113" height="626" alt="98e235fe-dc71-4cd6-8601-588ef7684a68" src="https://github.com/user-attachments/assets/18a7fedd-8ebf-4f11-95ca-8f434a739f3b" />
+
+
+
+---
 
 ## What I Learned
 
